@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		572FA6BABE4C78585962A9B6 /* Pods_OneLabUnsplash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9F2F0D38CFFC1C98DD43DC /* Pods_OneLabUnsplash.framework */; };
+		BE1A880525B0075B0033B322 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880425B0075B0033B322 /* AppDelegate.swift */; };
+		BE1A880725B0075B0033B322 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880625B0075B0033B322 /* SceneDelegate.swift */; };
+		BE1A880925B0075B0033B322 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880825B0075B0033B322 /* ViewController.swift */; };
+		BE1A880C25B0075B0033B322 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1A880A25B0075B0033B322 /* Main.storyboard */; };
+		BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */; };
+		BE1A881125B0075F0033B322 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1A881025B0075F0033B322 /* Assets.xcassets */; };
+		BE1A881425B0075F0033B322 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0F9F2F0D38CFFC1C98DD43DC /* Pods_OneLabUnsplash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneLabUnsplash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1167BAD59E7E96F2FB8A4E65 /* Pods-OneLabUnsplash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneLabUnsplash.debug.xcconfig"; path = "Target Support Files/Pods-OneLabUnsplash/Pods-OneLabUnsplash.debug.xcconfig"; sourceTree = "<group>"; };
+		BD9C433F04D9C4A6D02462AE /* Pods-OneLabUnsplash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneLabUnsplash.release.xcconfig"; path = "Target Support Files/Pods-OneLabUnsplash/Pods-OneLabUnsplash.release.xcconfig"; sourceTree = "<group>"; };
+		BE1A880125B0075B0033B322 /* OneLabUnsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneLabUnsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE1A880425B0075B0033B322 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BE1A880625B0075B0033B322 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BE1A880825B0075B0033B322 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BE1A880B25B0075B0033B322 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BE1A880E25B0075B0033B322 /* OneLabUnsplash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OneLabUnsplash.xcdatamodel; sourceTree = "<group>"; };
+		BE1A881025B0075F0033B322 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE1A881325B0075F0033B322 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BE1A881525B0075F0033B322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE1A87FE25B0075B0033B322 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				572FA6BABE4C78585962A9B6 /* Pods_OneLabUnsplash.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B05CBB35704603CF30DAF5F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F9F2F0D38CFFC1C98DD43DC /* Pods_OneLabUnsplash.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE1A87F825B0075B0033B322 = {
+			isa = PBXGroup;
+			children = (
+				BE1A880325B0075B0033B322 /* OneLabUnsplash */,
+				BE1A880225B0075B0033B322 /* Products */,
+				D43E82FE9516649B0E5B457B /* Pods */,
+				B05CBB35704603CF30DAF5F2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BE1A880225B0075B0033B322 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE1A880125B0075B0033B322 /* OneLabUnsplash.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE1A880325B0075B0033B322 /* OneLabUnsplash */ = {
+			isa = PBXGroup;
+			children = (
+				BE1A880425B0075B0033B322 /* AppDelegate.swift */,
+				BE1A880625B0075B0033B322 /* SceneDelegate.swift */,
+				BE1A880825B0075B0033B322 /* ViewController.swift */,
+				BE1A880A25B0075B0033B322 /* Main.storyboard */,
+				BE1A881025B0075F0033B322 /* Assets.xcassets */,
+				BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */,
+				BE1A881525B0075F0033B322 /* Info.plist */,
+				BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */,
+			);
+			path = OneLabUnsplash;
+			sourceTree = "<group>";
+		};
+		D43E82FE9516649B0E5B457B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1167BAD59E7E96F2FB8A4E65 /* Pods-OneLabUnsplash.debug.xcconfig */,
+				BD9C433F04D9C4A6D02462AE /* Pods-OneLabUnsplash.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE1A880025B0075B0033B322 /* OneLabUnsplash */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE1A881825B007600033B322 /* Build configuration list for PBXNativeTarget "OneLabUnsplash" */;
+			buildPhases = (
+				2A831254638CAE2A7DA3DE86 /* [CP] Check Pods Manifest.lock */,
+				BE1A87FD25B0075B0033B322 /* Sources */,
+				BE1A87FE25B0075B0033B322 /* Frameworks */,
+				BE1A87FF25B0075B0033B322 /* Resources */,
+				2CD6632583A31CE7B7A82533 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneLabUnsplash;
+			productName = OneLabUnsplash;
+			productReference = BE1A880125B0075B0033B322 /* OneLabUnsplash.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE1A87F925B0075B0033B322 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1210;
+				LastUpgradeCheck = 1210;
+				TargetAttributes = {
+					BE1A880025B0075B0033B322 = {
+						CreatedOnToolsVersion = 12.1;
+					};
+				};
+			};
+			buildConfigurationList = BE1A87FC25B0075B0033B322 /* Build configuration list for PBXProject "OneLabUnsplash" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BE1A87F825B0075B0033B322;
+			productRefGroup = BE1A880225B0075B0033B322 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE1A880025B0075B0033B322 /* OneLabUnsplash */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE1A87FF25B0075B0033B322 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE1A881425B0075F0033B322 /* LaunchScreen.storyboard in Resources */,
+				BE1A881125B0075F0033B322 /* Assets.xcassets in Resources */,
+				BE1A880C25B0075B0033B322 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A831254638CAE2A7DA3DE86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneLabUnsplash-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2CD6632583A31CE7B7A82533 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OneLabUnsplash/Pods-OneLabUnsplash-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OneLabUnsplash/Pods-OneLabUnsplash-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OneLabUnsplash/Pods-OneLabUnsplash-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE1A87FD25B0075B0033B322 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE1A880925B0075B0033B322 /* ViewController.swift in Sources */,
+				BE1A880525B0075B0033B322 /* AppDelegate.swift in Sources */,
+				BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */,
+				BE1A880725B0075B0033B322 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BE1A880A25B0075B0033B322 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE1A880B25B0075B0033B322 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE1A881325B0075F0033B322 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE1A881625B0075F0033B322 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BE1A881725B007600033B322 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE1A881925B007600033B322 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1167BAD59E7E96F2FB8A4E65 /* Pods-OneLabUnsplash.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M6Q55NKN7U;
+				INFOPLIST_FILE = OneLabUnsplash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = abutalipov.alikhan.OneLabUnsplash;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BE1A881A25B007600033B322 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD9C433F04D9C4A6D02462AE /* Pods-OneLabUnsplash.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M6Q55NKN7U;
+				INFOPLIST_FILE = OneLabUnsplash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = abutalipov.alikhan.OneLabUnsplash;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE1A87FC25B0075B0033B322 /* Build configuration list for PBXProject "OneLabUnsplash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1A881625B0075F0033B322 /* Debug */,
+				BE1A881725B007600033B322 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE1A881825B007600033B322 /* Build configuration list for PBXNativeTarget "OneLabUnsplash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1A881925B007600033B322 /* Debug */,
+				BE1A881A25B007600033B322 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BE1A880E25B0075B0033B322 /* OneLabUnsplash.xcdatamodel */,
+			);
+			currentVersion = BE1A880E25B0075B0033B322 /* OneLabUnsplash.xcdatamodel */;
+			path = OneLabUnsplash.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = BE1A87F925B0075B0033B322 /* Project object */;
+}
