@@ -35,8 +35,9 @@ class MainViewController: UIViewController {
     }
 
     private func loadData() {
-        viewModel.fetchPosts()
         bindViewModel()
+        viewModel.fetchPosts()
+        viewModel.fetchTopics()
     }
     
     private func configureUI() {
