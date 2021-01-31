@@ -14,8 +14,13 @@
 		BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */; };
 		BE1A881125B0075F0033B322 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1A881025B0075F0033B322 /* Assets.xcassets */; };
 		BE1A881425B0075F0033B322 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */; };
-		BE5D12B625B5D8B200095038 /* UnsplashKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE5D12B525B5D8B200095038 /* UnsplashKeys.plist */; };
 		BE5D12E525BC692A00095038 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D12E425BC692A00095038 /* MainViewModel.swift */; };
+		FD80C37925C6875A0092F525 /* UnsplashKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD80C37825C6875A0092F525 /* UnsplashKeys.plist */; };
+		FD80C38A25C68B440092F525 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C38925C68B440092F525 /* PostService.swift */; };
+		FD80C38D25C68B630092F525 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C38C25C68B630092F525 /* Photo.swift */; };
+		FD80C39425C6939B0092F525 /* PostDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C39325C6939B0092F525 /* PostDataProvider.swift */; };
+		FD80C39825C6943F0092F525 /* StretchyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */; };
+		FD80C39B25C6944E0092F525 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +35,13 @@
 		BE1A881025B0075F0033B322 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE1A881325B0075F0033B322 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE1A881525B0075F0033B322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE5D12B525B5D8B200095038 /* UnsplashKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UnsplashKeys.plist; sourceTree = "<group>"; };
 		BE5D12E425BC692A00095038 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		FD80C37825C6875A0092F525 /* UnsplashKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnsplashKeys.plist; sourceTree = "<group>"; };
+		FD80C38925C68B440092F525 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		FD80C38C25C68B630092F525 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		FD80C39325C6939B0092F525 /* PostDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataProvider.swift; sourceTree = "<group>"; };
+		FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderView.swift; sourceTree = "<group>"; };
+		FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,15 +85,12 @@
 		BE1A880325B0075B0033B322 /* OneLabUnsplash */ = {
 			isa = PBXGroup;
 			children = (
-				BE1A880425B0075B0033B322 /* AppDelegate.swift */,
-				BE1A880625B0075B0033B322 /* SceneDelegate.swift */,
-				BE1A880825B0075B0033B322 /* MainViewController.swift */,
-				BE5D12E425BC692A00095038 /* MainViewModel.swift */,
-				BE1A881025B0075F0033B322 /* Assets.xcassets */,
-				BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */,
+				FD80C38425C689FA0092F525 /* Presentation Layer */,
+				FD80C38225C689D40092F525 /* Service Layer */,
+				FD80C38325C689DD0092F525 /* Others */,
 				BE1A881525B0075F0033B322 /* Info.plist */,
 				BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */,
-				BE5D12B525B5D8B200095038 /* UnsplashKeys.plist */,
+				FD80C37825C6875A0092F525 /* UnsplashKeys.plist */,
 			);
 			path = OneLabUnsplash;
 			sourceTree = "<group>";
@@ -95,6 +102,38 @@
 				BD9C433F04D9C4A6D02462AE /* Pods-OneLabUnsplash.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FD80C38225C689D40092F525 /* Service Layer */ = {
+			isa = PBXGroup;
+			children = (
+				FD80C38925C68B440092F525 /* PostService.swift */,
+				FD80C39325C6939B0092F525 /* PostDataProvider.swift */,
+			);
+			path = "Service Layer";
+			sourceTree = "<group>";
+		};
+		FD80C38325C689DD0092F525 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				BE1A880425B0075B0033B322 /* AppDelegate.swift */,
+				BE1A880625B0075B0033B322 /* SceneDelegate.swift */,
+				BE1A881025B0075F0033B322 /* Assets.xcassets */,
+				BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		FD80C38425C689FA0092F525 /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				BE1A880825B0075B0033B322 /* MainViewController.swift */,
+				BE5D12E425BC692A00095038 /* MainViewModel.swift */,
+				FD80C38C25C68B630092F525 /* Photo.swift */,
+				FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */,
+				FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */,
+			);
+			path = "Presentation Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,9 +195,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE5D12B625B5D8B200095038 /* UnsplashKeys.plist in Resources */,
 				BE1A881425B0075F0033B322 /* LaunchScreen.storyboard in Resources */,
 				BE1A881125B0075F0033B322 /* Assets.xcassets in Resources */,
+				FD80C37925C6875A0092F525 /* UnsplashKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,11 +250,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD80C39B25C6944E0092F525 /* PhotoTableViewCell.swift in Sources */,
 				BE5D12E525BC692A00095038 /* MainViewModel.swift in Sources */,
+				FD80C38A25C68B440092F525 /* PostService.swift in Sources */,
 				BE1A880925B0075B0033B322 /* MainViewController.swift in Sources */,
 				BE1A880525B0075B0033B322 /* AppDelegate.swift in Sources */,
+				FD80C39425C6939B0092F525 /* PostDataProvider.swift in Sources */,
 				BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */,
+				FD80C38D25C68B630092F525 /* Photo.swift in Sources */,
 				BE1A880725B0075B0033B322 /* SceneDelegate.swift in Sources */,
+				FD80C39825C6943F0092F525 /* StretchyHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
