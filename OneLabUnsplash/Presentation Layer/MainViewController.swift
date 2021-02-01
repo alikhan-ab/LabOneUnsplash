@@ -12,12 +12,28 @@ class MainViewController: UIViewController {
     private let viewModel: MainViewModel
     
     private let stretchyHeaderHeight: CGFloat = 350
-
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
         return tableView
     }()
+
+    private lazy var topicsSollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 5
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        let collectionView = UICollectionView(frame: .zero,collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(TopicsCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: TopicsCollectionViewCell.self))
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+
+    private var topicsCollectionViewHeightConstraint: Constraint?
     
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -41,7 +57,9 @@ class MainViewController: UIViewController {
     }
     
     private func configureUI() {
+        configureNavigationBar()
         configureTableView()
+        configureTopicsView()
     }
 
     private func bindViewModel() {
@@ -50,6 +68,31 @@ class MainViewController: UIViewController {
         }
         viewModel.didGetError = { error in
             print(error)
+        }
+        viewModel.didFetchTopics = {
+            self.topicsSollectionView.reloadData()
+            self.topicsSollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
+        }
+    }
+
+    private func configureNavigationBar() {
+        title = "Unsplash"
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.isTranslucent = true
+    }
+
+    private func configureTopicsView() {
+        view.addSubview(topicsSollectionView)
+        topicsSollectionView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+            self.topicsCollectionViewHeightConstraint = $0.height.equalTo(60).constraint
         }
     }
 
@@ -63,7 +106,10 @@ class MainViewController: UIViewController {
         let identifier = String(describing: PhotoTableViewCell.self)
         tableView.register(PhotoTableViewCell.self, forCellReuseIdentifier: identifier)
         tableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview()
+            $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
@@ -72,6 +118,22 @@ class MainViewController: UIViewController {
             return
         }
         header.scrollViewDidScroll(scrollView: tableView)
+    }
+}
+
+extension MainViewController: UICollectionViewDelegate {
+
+}
+
+extension MainViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.topics.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TopicsCollectionViewCell.self), for: indexPath) as? TopicsCollectionViewCell else { return UICollectionViewCell() }
+        cell.textLabel.text = viewModel.topics[indexPath.row].title
+        return cell
     }
 }
 

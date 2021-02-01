@@ -27,9 +27,6 @@ extension NetworkRequest {
     fileprivate func fetch(_ request: URLRequest, withCompletion completion: @escaping (ModelType?) -> Void) {
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
         let task = session.dataTask(with: request) { [weak self] (data: Data?, response: URLResponse?, error: Error?) in
-            if let response = response {
-                print(response)
-            }
             guard let data = data else {
                 completion(nil)
                 return
@@ -50,7 +47,6 @@ class ApiRequest<Resource: ApiResource>  {
 
 extension ApiRequest: NetworkRequest {
     func decode(_ data: Data) -> [Resource.ModelType]? {
-        print(String(describing: [Resource.ModelType].self))
         do {
             let topics = try JSONDecoder().decode([Resource.ModelType].self, from: data)
             return topics

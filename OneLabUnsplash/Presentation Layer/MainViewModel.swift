@@ -12,9 +12,10 @@ final class MainViewModel {
     var didGetError: (Error) -> Void = { _ in }
     var didFetchTopics: () -> Void = {}
     private(set) var posts: [Photo] = []
-    private(set) var topics: [Topic] = []
+    private(set) var topics: [Topic] = [Topic(slug: "unsplash-editorial", title: "Editorial", photosURL: URL(string: "https://api.unsplash.com/collections/317099/photos?per_page=1")!)]
     private let postService: PostService = PostServiceImpl()
     private let topicsRequest: ApiRequest = ApiRequest(resource: TopicsResource())
+    private var areTopicsFetched: Bool = false
 
     func fetchPosts() {
         postService.fetchPosts { [weak self] posts in
@@ -26,12 +27,14 @@ final class MainViewModel {
     }
 
     func fetchTopics() {
+        guard !areTopicsFetched else { return }
         topicsRequest.fetch { [weak self] topics in
             guard let topics = topics else {
                 // TODO: - Change/make the error implementation
                 return
             }
-            self?.topics = topics
+            self?.areTopicsFetched = true
+            self?.topics.append(contentsOf: topics)
             self?.didFetchTopics()
         }
     }

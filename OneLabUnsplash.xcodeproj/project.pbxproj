@@ -15,6 +15,7 @@
 		BE2B8B6225C6AFB400E0D1D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE2B8B5D25C6AFB400E0D1D5 /* LaunchScreen.storyboard */; };
 		BE2B8B6325C6AFB400E0D1D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5F25C6AFB400E0D1D5 /* AppDelegate.swift */; };
 		BE2B8B6425C6AFB400E0D1D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE2B8B6025C6AFB400E0D1D5 /* Assets.xcassets */; };
+		BE2B8B7525C7347A00E0D1D5 /* TopicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */; };
 		BE9D2C5125C590040089BFA0 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */; };
 		BE9D2C5425C683940089BFA0 /* ApiResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5325C683940089BFA0 /* ApiResource.swift */; };
 		BE9D2C5A25C6A4230089BFA0 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5925C6A4230089BFA0 /* Topic.swift */; };
@@ -40,6 +41,7 @@
 		BE2B8B5E25C6AFB400E0D1D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE2B8B5F25C6AFB400E0D1D5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = OneLabUnsplash/Others/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		BE2B8B6025C6AFB400E0D1D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OneLabUnsplash/Others/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		BE9D2C5325C683940089BFA0 /* ApiResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResource.swift; sourceTree = "<group>"; };
 		BE9D2C5925C6A4230089BFA0 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				FD80C38C25C68B630092F525 /* Photo.swift */,
 				FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */,
 				FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */,
+				BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */,
 			);
 			path = "Presentation Layer";
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B8B7525C7347A00E0D1D5 /* TopicsCollectionViewCell.swift in Sources */,
 				FD80C39B25C6944E0092F525 /* PhotoTableViewCell.swift in Sources */,
 				BE2B8B6125C6AFB400E0D1D5 /* SceneDelegate.swift in Sources */,
 				BE9D2C5425C683940089BFA0 /* ApiResource.swift in Sources */,
