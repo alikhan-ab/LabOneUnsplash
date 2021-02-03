@@ -120,6 +120,7 @@ iOSInjectionProject/
 
 
 
+
 ## Gcc Patch
 /*.gcno
 
@@ -129,8 +130,5 @@ iOSInjectionProject/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
-
-### Keys ###
-UnsplashKeys.plist
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,macos
