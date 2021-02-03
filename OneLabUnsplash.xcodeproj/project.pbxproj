@@ -8,13 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		572FA6BABE4C78585962A9B6 /* Pods_OneLabUnsplash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9F2F0D38CFFC1C98DD43DC /* Pods_OneLabUnsplash.framework */; };
-		BE1A880525B0075B0033B322 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880425B0075B0033B322 /* AppDelegate.swift */; };
-		BE1A880725B0075B0033B322 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880625B0075B0033B322 /* SceneDelegate.swift */; };
-		BE1A880925B0075B0033B322 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880825B0075B0033B322 /* ViewController.swift */; };
 		BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */; };
-		BE1A881125B0075F0033B322 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1A881025B0075F0033B322 /* Assets.xcassets */; };
-		BE1A881425B0075F0033B322 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */; };
-		BE5D12B625B5D8B200095038 /* UnsplashKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE5D12B525B5D8B200095038 /* UnsplashKeys.plist */; };
+		BE2B8B5825C6AF9B00E0D1D5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5625C6AF9A00E0D1D5 /* MainViewController.swift */; };
+		BE2B8B5925C6AF9B00E0D1D5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5725C6AF9A00E0D1D5 /* MainViewModel.swift */; };
+		BE2B8B6125C6AFB400E0D1D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5B25C6AFB400E0D1D5 /* SceneDelegate.swift */; };
+		BE2B8B6225C6AFB400E0D1D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE2B8B5D25C6AFB400E0D1D5 /* LaunchScreen.storyboard */; };
+		BE2B8B6325C6AFB400E0D1D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5F25C6AFB400E0D1D5 /* AppDelegate.swift */; };
+		BE2B8B6425C6AFB400E0D1D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE2B8B6025C6AFB400E0D1D5 /* Assets.xcassets */; };
+		BE2B8B7525C7347A00E0D1D5 /* TopicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */; };
+		BE9D2C5125C590040089BFA0 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */; };
+		BE9D2C5425C683940089BFA0 /* ApiResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5325C683940089BFA0 /* ApiResource.swift */; };
+		BE9D2C5A25C6A4230089BFA0 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5925C6A4230089BFA0 /* Topic.swift */; };
+		FD80C37925C6875A0092F525 /* UnsplashKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD80C37825C6875A0092F525 /* UnsplashKeys.plist */; };
+		FD80C38A25C68B440092F525 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C38925C68B440092F525 /* PostService.swift */; };
+		FD80C38D25C68B630092F525 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C38C25C68B630092F525 /* Photo.swift */; };
+		FD80C39425C6939B0092F525 /* PostDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C39325C6939B0092F525 /* PostDataProvider.swift */; };
+		FD80C39825C6943F0092F525 /* StretchyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */; };
+		FD80C39B25C6944E0092F525 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,14 +32,25 @@
 		1167BAD59E7E96F2FB8A4E65 /* Pods-OneLabUnsplash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneLabUnsplash.debug.xcconfig"; path = "Target Support Files/Pods-OneLabUnsplash/Pods-OneLabUnsplash.debug.xcconfig"; sourceTree = "<group>"; };
 		BD9C433F04D9C4A6D02462AE /* Pods-OneLabUnsplash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneLabUnsplash.release.xcconfig"; path = "Target Support Files/Pods-OneLabUnsplash/Pods-OneLabUnsplash.release.xcconfig"; sourceTree = "<group>"; };
 		BE1A880125B0075B0033B322 /* OneLabUnsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneLabUnsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE1A880425B0075B0033B322 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BE1A880625B0075B0033B322 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BE1A880825B0075B0033B322 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BE1A880E25B0075B0033B322 /* OneLabUnsplash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OneLabUnsplash.xcdatamodel; sourceTree = "<group>"; };
-		BE1A881025B0075F0033B322 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE1A881325B0075F0033B322 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE1A881525B0075F0033B322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE5D12B525B5D8B200095038 /* UnsplashKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UnsplashKeys.plist; sourceTree = "<group>"; };
+		BE2B8B5625C6AF9A00E0D1D5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BE2B8B5725C6AF9A00E0D1D5 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		BE2B8B5B25C6AFB400E0D1D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = OneLabUnsplash/Others/SceneDelegate.swift; sourceTree = SOURCE_ROOT; };
+		BE2B8B5E25C6AFB400E0D1D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BE2B8B5F25C6AFB400E0D1D5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = OneLabUnsplash/Others/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		BE2B8B6025C6AFB400E0D1D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OneLabUnsplash/Others/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		BE9D2C5325C683940089BFA0 /* ApiResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResource.swift; sourceTree = "<group>"; };
+		BE9D2C5925C6A4230089BFA0 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		FD80C37825C6875A0092F525 /* UnsplashKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnsplashKeys.plist; sourceTree = "<group>"; };
+		FD80C38925C68B440092F525 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		FD80C38C25C68B630092F525 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		FD80C39325C6939B0092F525 /* PostDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataProvider.swift; sourceTree = "<group>"; };
+		FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderView.swift; sourceTree = "<group>"; };
+		FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,17 +94,26 @@
 		BE1A880325B0075B0033B322 /* OneLabUnsplash */ = {
 			isa = PBXGroup;
 			children = (
-				BE1A880425B0075B0033B322 /* AppDelegate.swift */,
-				BE1A880625B0075B0033B322 /* SceneDelegate.swift */,
-				BE1A880825B0075B0033B322 /* ViewController.swift */,
-				BE1A881025B0075F0033B322 /* Assets.xcassets */,
+				FD80C38425C689FA0092F525 /* Presentation Layer */,
+				FD80C38225C689D40092F525 /* Service Layer */,
+				FD80C38325C689DD0092F525 /* Others */,
+				BE9D2C5925C6A4230089BFA0 /* Topic.swift */,
 				BE1A881225B0075F0033B322 /* LaunchScreen.storyboard */,
 				BE1A881525B0075F0033B322 /* Info.plist */,
 				BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */,
-				BE5D12B525B5D8B200095038 /* UnsplashKeys.plist */,
+				FD80C37825C6875A0092F525 /* UnsplashKeys.plist */,
 			);
 			path = OneLabUnsplash;
 			sourceTree = "<group>";
+		};
+		BE2B8B5C25C6AFB400E0D1D5 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B8B5D25C6AFB400E0D1D5 /* LaunchScreen.storyboard */,
+			);
+			name = Base.lproj;
+			path = OneLabUnsplash/Others/Base.lproj;
+			sourceTree = SOURCE_ROOT;
 		};
 		D43E82FE9516649B0E5B457B /* Pods */ = {
 			isa = PBXGroup;
@@ -92,6 +122,41 @@
 				BD9C433F04D9C4A6D02462AE /* Pods-OneLabUnsplash.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FD80C38225C689D40092F525 /* Service Layer */ = {
+			isa = PBXGroup;
+			children = (
+				BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */,
+				BE9D2C5325C683940089BFA0 /* ApiResource.swift */,
+				FD80C38925C68B440092F525 /* PostService.swift */,
+				FD80C39325C6939B0092F525 /* PostDataProvider.swift */,
+			);
+			path = "Service Layer";
+			sourceTree = "<group>";
+		};
+		FD80C38325C689DD0092F525 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B8B5F25C6AFB400E0D1D5 /* AppDelegate.swift */,
+				BE2B8B6025C6AFB400E0D1D5 /* Assets.xcassets */,
+				BE2B8B5C25C6AFB400E0D1D5 /* Base.lproj */,
+				BE2B8B5B25C6AFB400E0D1D5 /* SceneDelegate.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		FD80C38425C689FA0092F525 /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B8B5625C6AF9A00E0D1D5 /* MainViewController.swift */,
+				BE2B8B5725C6AF9A00E0D1D5 /* MainViewModel.swift */,
+				FD80C38C25C68B630092F525 /* Photo.swift */,
+				FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */,
+				FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */,
+				BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */,
+			);
+			path = "Presentation Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,9 +218,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE5D12B625B5D8B200095038 /* UnsplashKeys.plist in Resources */,
-				BE1A881425B0075F0033B322 /* LaunchScreen.storyboard in Resources */,
-				BE1A881125B0075F0033B322 /* Assets.xcassets in Resources */,
+				BE2B8B6225C6AFB400E0D1D5 /* LaunchScreen.storyboard in Resources */,
+				BE2B8B6425C6AFB400E0D1D5 /* Assets.xcassets in Resources */,
+				FD80C37925C6875A0092F525 /* UnsplashKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,10 +273,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE1A880925B0075B0033B322 /* ViewController.swift in Sources */,
-				BE1A880525B0075B0033B322 /* AppDelegate.swift in Sources */,
+				BE2B8B7525C7347A00E0D1D5 /* TopicsCollectionViewCell.swift in Sources */,
+				FD80C39B25C6944E0092F525 /* PhotoTableViewCell.swift in Sources */,
+				BE2B8B6125C6AFB400E0D1D5 /* SceneDelegate.swift in Sources */,
+				BE9D2C5425C683940089BFA0 /* ApiResource.swift in Sources */,
+				BE2B8B6325C6AFB400E0D1D5 /* AppDelegate.swift in Sources */,
+				BE9D2C5A25C6A4230089BFA0 /* Topic.swift in Sources */,
+				BE2B8B5825C6AF9B00E0D1D5 /* MainViewController.swift in Sources */,
+				FD80C38A25C68B440092F525 /* PostService.swift in Sources */,
+				BE2B8B5925C6AF9B00E0D1D5 /* MainViewModel.swift in Sources */,
+				FD80C39425C6939B0092F525 /* PostDataProvider.swift in Sources */,
 				BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */,
-				BE1A880725B0075B0033B322 /* SceneDelegate.swift in Sources */,
+				FD80C38D25C68B630092F525 /* Photo.swift in Sources */,
+				BE9D2C5125C590040089BFA0 /* NetworkRequest.swift in Sources */,
+				FD80C39825C6943F0092F525 /* StretchyHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +297,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				BE1A881325B0075F0033B322 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BE2B8B5D25C6AFB400E0D1D5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE2B8B5E25C6AFB400E0D1D5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
