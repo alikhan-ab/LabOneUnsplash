@@ -13,6 +13,12 @@ final class PhotoTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         return imageView
     }()
+
+    let authorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        return label
+    }()
     
     var url: String? {
         didSet {
@@ -24,6 +30,7 @@ final class PhotoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configurePhotoImageView()
+        configureAuthorLabel()
     }
 
     required init?(coder: NSCoder) {
@@ -37,6 +44,15 @@ final class PhotoTableViewCell: UITableViewCell {
             $0.top.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(0)
             $0.bottom.equalToSuperview().offset(0)
+        }
+    }
+
+    private func configureAuthorLabel() {
+        contentView.addSubview(authorLabel)
+        authorLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(10)
+            $0.trailing.lessThanOrEqualToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-10)
         }
     }
 }

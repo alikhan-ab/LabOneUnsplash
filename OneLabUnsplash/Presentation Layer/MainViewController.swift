@@ -137,6 +137,7 @@ extension MainViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - tableView protocols
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return calculateCellHeight(viewModel.posts[indexPath.row].height, viewModel.posts[indexPath.row].width)
