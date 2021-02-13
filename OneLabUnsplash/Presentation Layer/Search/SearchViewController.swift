@@ -93,6 +93,7 @@ class SearchViewController: UIViewController {
         configureTitleView()
         configureStackView()
         configureSegmentedControl()
+        hideKeyboardWhenTappedAround()
     }
     
     private func configureTitleView() {
@@ -121,7 +122,9 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.register(SearchTableViewCell.self)
         tableView.register(PhotoTableViewCell.self)
-        let tableViewTopOffset = searchBar.frame.size.height + segmentedControl.frame.size.height - (navigationController?.navigationBar.frame.size.height)!
+        tableView.register(CollectionTableViewCell.self)
+        tableView.register(UserTableViewCell.self)
+        let tableViewTopOffset = searchBar.frame.size.height + segmentedControl.frame.size.height - (navigationController?.navigationBar.frame.size.height)! + 15
         tableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(tableViewTopOffset)
             $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
@@ -170,9 +173,16 @@ class SearchViewController: UIViewController {
         return sectionView
     }
     
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
     // MARK: User interactions
     
     @objc func segmentedControlDidChange(_ segmentedControl: UISegmentedControl) {
+        viewModel.setCurrentCell(selectedSegmentIndex: segmentedControl.selectedSegmentIndex)
         tableView.reloadData()
     }
     
@@ -185,6 +195,14 @@ class SearchViewController: UIViewController {
         let filtersViewController = FiltersViewController()
         self.present(filtersViewController, animated: true, completion: nil)
     }
+    
+    @objc private func cloaseKeyboardButtonDidPress() {
+        searchBar.perform(#selector(self.resignFirstResponder), with: nil, afterDelay: 0.1)
+    }
+    
+    @objc func dismissKeyboard() {
+        searchBar.perform(#selector(self.resignFirstResponder), with: nil, afterDelay: 0.1)
+    }
 }
 
 // MARK: SearchViewController + UITableViewDataSource
@@ -192,58 +210,42 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.isSearchMode {
-            switch section {
-            case 0:
-                return viewModel.recentItems.count
-            default:
-                return viewModel.trendingItems.count
-            }
-        }
-       return 10
+        return viewModel.getNumberOfRowsInSection(section: section)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if viewModel.isSearchMode {
-           return 2
-        }
-       return 1
+        return viewModel.getNumberOfSections()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if viewModel.isSearchMode {
-            var item: String
-            switch indexPath.section {
-            case 0:
-                item = viewModel.recentItems[indexPath.row]
-            default:
-                item = viewModel.trendingItems[indexPath.row]
-            }
             let cell: SearchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.titleLabel.text = item
-            return cell
-        } else {
-            let cell: PhotoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.photoImageView.image = UIImage(named: "image")
+            let cellTitle = viewModel.getSearchCellTitle(indexPath: indexPath)
+            cell.titleLabel.text = cellTitle
             return cell
         }
-        
+        switch viewModel.currentCell {
+        case .photo:
+            let cell: PhotoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let image = UIImage(named: "image")
+            cell.photoImageView.image = image
+            return cell
+        case .collection:
+            let cell: CollectionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.nameTitle.text = "lunar new year"
+            cell.photoImageView.image = UIImage(named: "image")
+            return cell
+        default:
+            let cell: UserTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.photoImageView.image = UIImage(named: "image")
+            cell.usernameLabel.text = "Danny Phantom"
+            cell.nicknameLabel.text = "phantom14"
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if viewModel.isSearchMode {
-            switch section {
-            case 0:
-                guard !viewModel.recentItems.isEmpty else { return nil }
-                return "Recent"
-            case 1:
-                guard !viewModel.trendingItems.isEmpty else { return nil }
-                return "Trending"
-            default:
-                return nil
-            }
-        }
-        return nil
+        return viewModel.getSectionTitle(section: section)
     }
 }
 
@@ -252,26 +254,31 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print(indexPath)
+        if viewModel.isSearchMode {
+            print(indexPath)
+        } else {
+            switch viewModel.currentCell {
+            case .photo:
+                print("Появятся три точки (Закрузка, +, лайк)")
+            case .collection:
+                let newViewController = PhotosFromCollectionViewController(viewModel: MainViewModel(), collectionName: "lunar new year", username: "enovaid")
+                self.navigationController?.pushViewController(newViewController, animated: true)
+            default:
+                print("Профайл юзера")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionView = makeSectionView(section: section)
-        return sectionView
+        return makeSectionView(section: section)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 && viewModel.recentItems.count == 0 || !viewModel.isSearchMode {
-            return 0
-        }
-        return 50
+        return CGFloat(viewModel.getSectionHeight(section: section))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if viewModel.isSearchMode {
-            return 45
-        }
-        return 350
+        return CGFloat(viewModel.getCellHeight())
     }
 }
 
@@ -279,15 +286,39 @@ extension SearchViewController: UITableViewDelegate {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        if searchText.isEmpty {
+        if searchText == "" {
+            searchBar.perform(#selector(self.resignFirstResponder), with: nil, afterDelay: 0.1)
             viewModel.isSearchMode = true
-        } else {
-            viewModel.isSearchMode = false
+            tableView.reloadData()
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        viewModel.isSearchMode = false
+        viewModel.recentItems.insert(searchBar.text!, at: 0)
         tableView.reloadData()
     }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        let image = UIImage(systemName: "keyboard.chevron.compact.down")
+        filtersButton.setImage(image, for: .normal)
+        filtersButton.imageEdgeInsets = UIEdgeInsets(top: 40, left: 30, bottom: 40, right: 30)
+        filtersButton.tintColor = .white
+        filtersButton.removeTarget(nil, action: nil, for: .allEvents)
+        filtersButton.addTarget(self, action: #selector(cloaseKeyboardButtonDidPress), for: .touchUpInside)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        let image = UIImage(named: "filters")
+        filtersButton.setImage(image, for: .normal)
+        filtersButton.imageEdgeInsets = UIEdgeInsets(top: 40, left: 25, bottom: 40, right: 25)
+        filtersButton.removeTarget(nil, action: nil, for: .allEvents)
+        filtersButton.addTarget(self, action: #selector(filtersButtonDidPress), for: .touchUpInside)
+    }
+    
 }
+
 
 // MARK: UIColor + extension
 

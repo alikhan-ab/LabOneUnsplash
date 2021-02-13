@@ -23,7 +23,7 @@ final class FiltersTableViewCell: UITableViewCell {
     }()
     
     private var sizeConstraint: Constraint?
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
@@ -53,7 +53,7 @@ final class FiltersTableViewCell: UITableViewCell {
         }
         configureColorViewAndTitleLabel(colorName: colorName)
     }
-
+    
     private func configureTitleLabel() {
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
