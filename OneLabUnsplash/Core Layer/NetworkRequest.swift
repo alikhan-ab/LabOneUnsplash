@@ -11,6 +11,7 @@ protocol NetworkRequest: AnyObject {
     associatedtype ModelType
     func decode(_ data: Data) throws -> ModelType
     func fetch(successCompletion: @escaping (ModelType, HTTPURLResponse) -> Void, errorCompletion: @escaping (DataResponseError) -> Void)
+    func cancelFetch(for url: URL)
 }
 
 extension NetworkRequest {
@@ -50,6 +51,14 @@ extension NetworkRequest {
         }
         task.resume()
     }
+
+    func cancelFetch(for url: URL) {
+        URLSession.shared.getAllTasks { tasks in
+            tasks.filter { $0.originalRequest?.url == url }
+                .first?
+                .cancel()
+        }
+    }
 }
 
 class ApiRequest<Resource: ApiResource>  {
@@ -72,7 +81,7 @@ extension ApiRequest: NetworkRequest {
 }
 
 class ImageRequest {
-    let url: URL
+    var url: URL
 
     init(url: URL) {
         self.url = url

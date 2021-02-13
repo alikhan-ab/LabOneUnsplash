@@ -20,10 +20,12 @@ final class PhotoTableViewCell: UITableViewCell {
         return label
     }()
     
-    var url: String? {
+    var url: String?
+
+    var photo: Photo? {
         didSet {
-            let data = try? Data(contentsOf: URL(string: url!)!)
-            photoImageView.image = UIImage(data: data!)
+            guard let oldPhoto = oldValue, let oldUrl = oldPhoto.urls["small"] else { return }
+            ImageDownloadServiceImpl.shared.cancelImageFetch(for: oldUrl)
         }
     }
     
@@ -38,9 +40,21 @@ final class PhotoTableViewCell: UITableViewCell {
     }
 
     func configure(with photo: Photo?) {
+        self.photo = photo
         if let photo = photo {
+            authorLabel.text = "\(photo.user.firstName) \(photo.user.lastName)"
             photoImageView.image = UIImage(blurHash: photo.blurHash, size: CGSize(width: 32, height: 32))
-            authorLabel.text = "Photo by author"
+            guard let imageUrl = photo.urls["small"] else {
+                return
+            }
+            ImageDownloadServiceImpl.shared.fetchImage(with: imageUrl) { [weak self] (image, url) in
+                if self?.photo?.urls["small"] == url {
+                    self?.photoImageView.image = image
+                }
+            } failure: { (error) in
+                print(error.reason)
+            }
+
         } else {
             photoImageView.image = nil
             authorLabel.text = "Photo by"

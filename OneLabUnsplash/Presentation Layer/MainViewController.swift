@@ -163,13 +163,13 @@ class MainViewController: UIViewController {
             self.tableView.reloadData()
 
             // TODO: - dispatchqueue main async?
-            if let previousContentOffset = self.photosContentOffsets[topicIndex] {
-    //            print("select indexPath: \(topicIndex), offset: \(previousContentOffset)")
-                self.tableView.setContentOffset(previousContentOffset, animated: false)
-            } else {
-    //            print("offset: zero")
-                self.tableView.setContentOffset(.zero, animated: false)
-            }
+//            if let previousContentOffset = self.photosContentOffsets[topicIndex] {
+//    //            print("select indexPath: \(topicIndex), offset: \(previousContentOffset)")
+//                self.tableView.setContentOffset(previousContentOffset, animated: false)
+//            } else {
+//    //            print("offset: zero")
+//                self.tableView.setContentOffset(.zero, animated: false)
+//            }
         }
     }
 
@@ -194,7 +194,6 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         photosContentOffsets[indexPath.row] = tableView.contentOffset
-//        print("deselect indexPath: \(indexPath.row), offset: \(photosContentOffsets[indexPath.row])")
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -218,8 +217,6 @@ extension MainViewController: UICollectionViewDataSource {
 // MARK: - UITableView Delegate and DataSource
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let post = viewModel.posts[indexPath.row]
-//        viewModel.updatePostLikeCount(id: post.id)
     }
 }
 
