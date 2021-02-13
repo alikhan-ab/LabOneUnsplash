@@ -6,9 +6,10 @@
 //
 
 import Foundation
-enum DataResponseError {
+enum DataResponseError: Error {
     case networkError
     case decodeError
+    case imageConvertionError
 
     var reason: String {
         switch self {
@@ -16,6 +17,8 @@ enum DataResponseError {
             return "Error while fetching"
         case .decodeError:
             return "Error while decoding"
+        case .imageConvertionError:
+            return "Error while converting data to UIImage"
         }
     }
 }

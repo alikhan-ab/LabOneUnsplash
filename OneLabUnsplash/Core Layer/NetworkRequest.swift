@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 protocol NetworkRequest: AnyObject {
     associatedtype ModelType
     func decode(_ data: Data) throws -> ModelType
@@ -67,5 +68,27 @@ extension ApiRequest: NetworkRequest {
 
     func fetch(successCompletion: @escaping (Array<Resource.ModelType>, HTTPURLResponse) -> Void, errorCompletion: @escaping (DataResponseError) -> Void) {
         fetch(resource.request, completion: successCompletion, errorCompletion: errorCompletion)
+    }
+}
+
+class ImageRequest {
+    let url: URL
+
+    init(url: URL) {
+        self.url = url
+    }
+}
+
+extension ImageRequest: NetworkRequest {
+    func decode(_ data: Data) throws -> UIImage {
+        if let image = UIImage(data: data) {
+            return image
+        } else {
+            throw DataResponseError.imageConvertionError
+        }
+    }
+
+    func fetch(successCompletion: @escaping (UIImage, HTTPURLResponse) -> Void, errorCompletion: @escaping (DataResponseError) -> Void) {
+        fetch(url, completion: successCompletion, errorCompletion: errorCompletion)
     }
 }

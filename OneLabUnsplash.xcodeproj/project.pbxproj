@@ -18,6 +18,7 @@
 		BE2B8B6325C6AFB400E0D1D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5F25C6AFB400E0D1D5 /* AppDelegate.swift */; };
 		BE2B8B6425C6AFB400E0D1D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE2B8B6025C6AFB400E0D1D5 /* Assets.xcassets */; };
 		BE2B8B7525C7347A00E0D1D5 /* TopicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */; };
+		BE9D2C4525D7DF05005EDDB0 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C4425D7DF05005EDDB0 /* APIService.swift */; };
 		BE9D2C5125C590040089BFA0 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */; };
 		BE9D2C5425C683940089BFA0 /* ApiResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5325C683940089BFA0 /* ApiResource.swift */; };
 		BE9D2C5A25C6A4230089BFA0 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D2C5925C6A4230089BFA0 /* Topic.swift */; };
@@ -46,6 +47,7 @@
 		BE2B8B5F25C6AFB400E0D1D5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = OneLabUnsplash/Others/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		BE2B8B6025C6AFB400E0D1D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OneLabUnsplash/Others/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE9D2C4425D7DF05005EDDB0 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		BE9D2C5325C683940089BFA0 /* ApiResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResource.swift; sourceTree = "<group>"; };
 		BE9D2C5925C6A4230089BFA0 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		BE1A880325B0075B0033B322 /* OneLabUnsplash */ = {
 			isa = PBXGroup;
 			children = (
+				BE9D2C4725D7E01D005EDDB0 /* Core Layer */,
 				FD80C38425C689FA0092F525 /* Presentation Layer */,
 				FD80C38225C689D40092F525 /* Service Layer */,
 				FD80C38325C689DD0092F525 /* Others */,
@@ -119,6 +122,16 @@
 			path = OneLabUnsplash/Others/Base.lproj;
 			sourceTree = SOURCE_ROOT;
 		};
+		BE9D2C4725D7E01D005EDDB0 /* Core Layer */ = {
+			isa = PBXGroup;
+			children = (
+				BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */,
+				BE9D2C5325C683940089BFA0 /* ApiResource.swift */,
+				BE1E2E8E25D3FDD9003B8828 /* Errors.swift */,
+			);
+			path = "Core Layer";
+			sourceTree = "<group>";
+		};
 		D43E82FE9516649B0E5B457B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,11 +144,9 @@
 		FD80C38225C689D40092F525 /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
-				BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */,
-				BE1E2E8E25D3FDD9003B8828 /* Errors.swift */,
-				BE9D2C5325C683940089BFA0 /* ApiResource.swift */,
 				FD80C38925C68B440092F525 /* PostService.swift */,
 				FD80C39325C6939B0092F525 /* PostDataProvider.swift */,
+				BE9D2C4425D7DF05005EDDB0 /* APIService.swift */,
 			);
 			path = "Service Layer";
 			sourceTree = "<group>";
@@ -279,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE9D2C4525D7DF05005EDDB0 /* APIService.swift in Sources */,
 				BE2B8B7525C7347A00E0D1D5 /* TopicsCollectionViewCell.swift in Sources */,
 				BE1E2E8F25D3FDD9003B8828 /* Errors.swift in Sources */,
 				FD80C39B25C6944E0092F525 /* PhotoTableViewCell.swift in Sources */,

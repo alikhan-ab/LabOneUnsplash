@@ -52,6 +52,8 @@ class MainViewController: UIViewController {
         loadData()
     }
 
+
+    // MARK: - Configure Methods
     private func configureUI() {
         view.backgroundColor = .darkGray
         configureNavigationBar()
@@ -116,6 +118,7 @@ class MainViewController: UIViewController {
         viewModel.fetchTopics()
     }
 
+    // MARK: - View Model Binding
     private func bindViewModel() {
         viewModel.didEndRequest = {
             self.tableView.reloadData()
@@ -130,7 +133,6 @@ class MainViewController: UIViewController {
         }
         viewModel.didFetchPhotos = { [unowned self] (topicIndex, indexPaths) in
             guard topicIndex == self.topicsCollectionView.indexPathsForSelectedItems?[0].row else {
-                print(topicIndex)
                 return
             }
 
@@ -153,6 +155,11 @@ class MainViewController: UIViewController {
             } else {
                 self.tableView.tableHeaderView = nil
             }
+
+            if !viewModel.isTopicPageFirstFetch(for: topicIndex) {
+                self.tableView.isHidden = false
+                self.spinnerView.stopAnimating()
+            }
             self.tableView.reloadData()
 
             // TODO: - dispatchqueue main async?
@@ -166,6 +173,7 @@ class MainViewController: UIViewController {
         }
     }
 
+    // MARK: -
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let header = tableView.tableHeaderView as? StretchyHeaderView else {
             return
@@ -175,8 +183,8 @@ class MainViewController: UIViewController {
 
     private func switchTopic(to topicIndex: Int) {
         if viewModel.isTopicPageFirstFetch(for: topicIndex) {
-            tableView.isHidden = true
             spinnerView.startAnimating()
+            tableView.isHidden = true
         }
         viewModel.switchTopic(to: topicIndex)
     }
@@ -237,8 +245,6 @@ extension MainViewController: UITableViewDataSource {
         } else {
             cell.configure(with: viewModel.currentTopicPhoto(at: indexPath.row))
         }
-
-//        cell.url = viewModel.posts[indexPath.row].urls["small"]
         return cell
     }
     

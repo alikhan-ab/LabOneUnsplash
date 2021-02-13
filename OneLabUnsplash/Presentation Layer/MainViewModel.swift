@@ -10,16 +10,13 @@ import UIKit
 fileprivate struct TopicPage {
     let topic: Topic
     var curentPage = 1
-    var lastPage: Int? = nil
     var totalItems = 0
     var photos: [Photo]
     var isFetchInProgress = false
-    let topicPhotosRequest: ApiRequest<TopicPhotosResource>
     var isFirstFetch = true
 
     init(topic: Topic) {
         self.topic = topic
-        self.topicPhotosRequest = ApiRequest(resource: TopicPhotosResource(topicSlug: topic.slug, page: 1))
         self.photos = []
     }
 }
@@ -47,6 +44,7 @@ final class MainViewModel {
     private var areTopicsFetched: Bool = false
     private let postService: PostService = PostServiceImpl()
     private let topicsRequest: ApiRequest = ApiRequest(resource: TopicsResource())
+    private let apiService: APIService = APIServiceImpl()
 
     // MARK: -
     func topicPhotosCount(for topicIndex: Int) -> Int {
@@ -69,6 +67,14 @@ final class MainViewModel {
         return topicPages[currentTopicIndex].photos[index]
     }
 
+    func switchTopic(to topicIndex: Int) {
+        currentTopicIndex = topicIndex
+        if topicPages[currentTopicIndex].isFirstFetch {
+            fetchPhotos()
+        }
+        didSwitchTopicTo(topicIndex)
+    }
+
     // MARK: - Fetch Methods
     func fetchPosts() {
         postService.fetchPosts { [weak self] posts in
@@ -83,18 +89,19 @@ final class MainViewModel {
     func fetchTopics() {
         guard !areTopicsFetched else { return }
         let successClosure: ([Topic], HTTPURLResponse) -> Void = { [weak self] (topics, response) in
-            self?.areTopicsFetched = true
+            guard let self = self else { return }
+            self.areTopicsFetched = true
             topics.forEach {
-                self?.topicPages.append(TopicPage(topic: $0))
+                self.topicPages.append(TopicPage(topic: $0))
             }
-            self?.topics.append(contentsOf: topics)
-            self?.didFetchTopics()
+            self.topics.append(contentsOf: topics)
+            self.didFetchTopics()
         }
         let errorClosure: (DataResponseError) -> Void = { [weak self] error in
             self?.didGetError(error.reason)
         }
 
-        topicsRequest.fetch(successCompletion: successClosure, errorCompletion: errorClosure)
+        apiService.fetchTopics(success: successClosure, failure: errorClosure)
     }
 
     func fetchPhotos() {
@@ -105,7 +112,6 @@ final class MainViewModel {
         guard !topicPages[topicIndex].isFetchInProgress else { return }
         topicPages[topicIndex].isFetchInProgress = true
         let currentPage = topicPages[topicIndex].curentPage
-        _ = topicPages[topicIndex].topicPhotosRequest.resource.changePageTo(page: currentPage)
 
         let successClosure: ([Photo], HTTPURLResponse) -> Void = { [weak self] (photos, response) in
             guard let self = self else { return }
@@ -118,13 +124,14 @@ final class MainViewModel {
 
             self.topicPages[topicIndex].curentPage += 1
             self.topicPages[topicIndex].isFetchInProgress = false
-            self.topicPages[topicIndex].totalItems = totalPhotos
             self.topicPages[topicIndex].photos.append(contentsOf: photos)
+            self.topicPages[topicIndex].isFirstFetch = false
 
             if self.topicPages[topicIndex].curentPage > 2 {
                 let indexPathsToReload = self.calculateIndexPathsToReload(forTopicIndex: topicIndex, from: photos)
                 self.didFetchPhotos(topicIndex, indexPathsToReload)
             } else {
+                self.topicPages[topicIndex].totalItems = totalPhotos
                 self.didFetchPhotos(topicIndex, nil)
             }
         }
@@ -133,19 +140,11 @@ final class MainViewModel {
             self?.topicPages[topicIndex].isFetchInProgress = false
             self?.didGetError(error.reason)
         }
-
-        topicPages[topicIndex].isFirstFetch = false
-        topicPages[topicIndex].topicPhotosRequest.fetch(successCompletion: successClosure, errorCompletion: errorClosure)
+        
+        apiService.fetchPhotos(for: topicPages[currentTopicIndex].topic, page: currentPage, success: successClosure, failure: errorClosure)
     }
 
-    func switchTopic(to topicIndex: Int) {
-        currentTopicIndex = topicIndex
-        if topicPages[currentTopicIndex].isFirstFetch {
-            fetchPhotos()
-        }
-        didSwitchTopicTo(topicIndex)
-    }
-
+    // MARK: -
     private func calculateIndexPathsToReload(forTopicIndex topicIndex: Int, from newPhotos: [Photo]) -> [IndexPath] {
         let startIndex = topicPages[topicIndex].photos.count - newPhotos.count
         let endIndex = startIndex + newPhotos.count
