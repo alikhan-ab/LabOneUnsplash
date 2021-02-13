@@ -11,7 +11,7 @@ struct User {
     let id: String
     let username: String
     let firstName: String
-    let lastName: String
+    let lastName: String?
     let profileImage: URL
 }
 
@@ -33,7 +33,7 @@ extension User: Decodable {
         id = try container.decode(String.self, forKey: .id)
         username = try container.decode(String.self, forKey: .username)
         firstName = try container.decode(String.self, forKey: .firstName)
-        lastName = try container.decode(String.self, forKey: .lastName)
+        lastName = try container.decode(String?.self, forKey: .lastName)
 
         let profileImageContrainer = try container.nestedContainer(keyedBy: CodingKeys.ProfileImageKeys.self, forKey: .profileImage)
         profileImage = try profileImageContrainer.decode(URL.self, forKey: .profileImage)

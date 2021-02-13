@@ -59,7 +59,7 @@ final class PhotoTableViewCell: UITableViewCell {
     func configure(with photo: Photo?) {
         self.photo = photo
         if let photo = photo {
-            authorLabel.text = "\(photo.user.firstName) \(photo.user.lastName)"
+            authorLabel.text = "\(photo.user.firstName) \(photo.user.lastName ?? "")"
             photoImageView.image = UIImage(blurHash: photo.blurHash, size: CGSize(width: 32, height: 32))
             guard let imageUrl = photo.urls["small"] else {
                 return

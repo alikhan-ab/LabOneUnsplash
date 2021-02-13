@@ -73,7 +73,7 @@ struct TopicPhotosResource: ApiResource {
     init(topicSlug: String, page: Int = 0) {
         self.methodPath = "\(TopicsResource.staticMethodPath)/\(topicSlug)/photos"
         self.page = page
-        self.queryItems = ["page:" : String(page)]
+        self.queryItems = ["page" : String(page)]
     }
 }
 extension TopicPhotosResource: PagedResource {
