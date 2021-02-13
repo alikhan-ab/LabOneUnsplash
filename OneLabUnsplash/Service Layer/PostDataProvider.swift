@@ -9,7 +9,7 @@ import Foundation
 
 protocol PostDataProvider {
     func fetchPosts(success: @escaping ([Photo]) -> Void, failure: @escaping (Error) -> Void)
-}
+}   
 
 final class PostNetworkDataProvider: PostDataProvider {
     func fetchPosts(success: @escaping ([Photo]) -> Void, failure: @escaping (Error) -> Void) {

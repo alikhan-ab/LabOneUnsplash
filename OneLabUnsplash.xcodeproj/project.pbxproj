@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		572FA6BABE4C78585962A9B6 /* Pods_OneLabUnsplash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9F2F0D38CFFC1C98DD43DC /* Pods_OneLabUnsplash.framework */; };
 		BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE1A880D25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld */; };
+		BE1E2E8F25D3FDD9003B8828 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1E2E8E25D3FDD9003B8828 /* Errors.swift */; };
+		BE1E2E9325D52FF5003B8828 /* BlurHashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1E2E9225D52FF4003B8828 /* BlurHashDecode.swift */; };
 		BE2B8B5825C6AF9B00E0D1D5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5625C6AF9A00E0D1D5 /* MainViewController.swift */; };
 		BE2B8B5925C6AF9B00E0D1D5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5725C6AF9A00E0D1D5 /* MainViewModel.swift */; };
 		BE2B8B6125C6AFB400E0D1D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B8B5B25C6AFB400E0D1D5 /* SceneDelegate.swift */; };
@@ -35,6 +37,8 @@
 		BE1A880E25B0075B0033B322 /* OneLabUnsplash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OneLabUnsplash.xcdatamodel; sourceTree = "<group>"; };
 		BE1A881325B0075F0033B322 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE1A881525B0075F0033B322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE1E2E8E25D3FDD9003B8828 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		BE1E2E9225D52FF4003B8828 /* BlurHashDecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlurHashDecode.swift; path = OneLabUnsplash/BlurHashDecode.swift; sourceTree = SOURCE_ROOT; };
 		BE2B8B5625C6AF9A00E0D1D5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BE2B8B5725C6AF9A00E0D1D5 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		BE2B8B5B25C6AFB400E0D1D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = OneLabUnsplash/Others/SceneDelegate.swift; sourceTree = SOURCE_ROOT; };
@@ -128,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				BE9D2C5025C590040089BFA0 /* NetworkRequest.swift */,
+				BE1E2E8E25D3FDD9003B8828 /* Errors.swift */,
 				BE9D2C5325C683940089BFA0 /* ApiResource.swift */,
 				FD80C38925C68B440092F525 /* PostService.swift */,
 				FD80C39325C6939B0092F525 /* PostDataProvider.swift */,
@@ -152,6 +157,7 @@
 				BE2B8B5625C6AF9A00E0D1D5 /* MainViewController.swift */,
 				BE2B8B5725C6AF9A00E0D1D5 /* MainViewModel.swift */,
 				FD80C38C25C68B630092F525 /* Photo.swift */,
+				BE1E2E9225D52FF4003B8828 /* BlurHashDecode.swift */,
 				FD80C39725C6943F0092F525 /* StretchyHeaderView.swift */,
 				FD80C39A25C6944E0092F525 /* PhotoTableViewCell.swift */,
 				BE2B8B7425C7347A00E0D1D5 /* TopicsCollectionViewCell.swift */,
@@ -274,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE2B8B7525C7347A00E0D1D5 /* TopicsCollectionViewCell.swift in Sources */,
+				BE1E2E8F25D3FDD9003B8828 /* Errors.swift in Sources */,
 				FD80C39B25C6944E0092F525 /* PhotoTableViewCell.swift in Sources */,
 				BE2B8B6125C6AFB400E0D1D5 /* SceneDelegate.swift in Sources */,
 				BE9D2C5425C683940089BFA0 /* ApiResource.swift in Sources */,
@@ -284,6 +291,7 @@
 				BE2B8B5925C6AF9B00E0D1D5 /* MainViewModel.swift in Sources */,
 				FD80C39425C6939B0092F525 /* PostDataProvider.swift in Sources */,
 				BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */,
+				BE1E2E9325D52FF5003B8828 /* BlurHashDecode.swift in Sources */,
 				FD80C38D25C68B630092F525 /* Photo.swift in Sources */,
 				BE9D2C5125C590040089BFA0 /* NetworkRequest.swift in Sources */,
 				FD80C39825C6943F0092F525 /* StretchyHeaderView.swift in Sources */,

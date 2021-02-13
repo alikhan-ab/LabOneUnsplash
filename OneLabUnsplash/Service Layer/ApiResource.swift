@@ -49,9 +49,43 @@ extension ApiResource {
     }
 }
 
+protocol PagedResource where Self: ApiResource {
+    var page: Int { get }
+    mutating func changePageTo(page: Int) -> Int
+    mutating func incrementPage(by amount: Int) -> Int
+}
+
 // MARK: - TOPICS RESOURCE
 struct TopicsResource: ApiResource {
     typealias ModelType = Topic
-    let methodPath = "/topics"
+    static let staticMethodPath = "/topics"
+    let methodPath = TopicsResource.staticMethodPath
     var queryItems: [String : String]? = ["order_by": "featured", "per_page": "30"]
+}
+
+// MARK: - TOPIC PHOTOS RESOURCE
+struct TopicPhotosResource: ApiResource {
+    typealias ModelType = Photo
+    let methodPath: String
+    var queryItems: [String : String]?
+    var page: Int
+
+    init(topicSlug: String, page: Int = 0) {
+        self.methodPath = "\(TopicsResource.staticMethodPath)/\(topicSlug)/photos"
+        self.page = page
+        self.queryItems = ["page:" : String(page)]
+    }
+}
+extension TopicPhotosResource: PagedResource {
+    mutating func changePageTo(page: Int) -> Int {
+        self.page = page
+        queryItems!["page"] = String(page)
+        return page
+    }
+
+    mutating func incrementPage(by amount: Int = 1) -> Int {
+        self.page += amount
+        queryItems!["page"] = String(page)
+        return Int(queryItems!["page"]!)!
+    }
 }

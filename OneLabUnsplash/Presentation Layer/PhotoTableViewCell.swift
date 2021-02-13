@@ -36,6 +36,16 @@ final class PhotoTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func configure(with photo: Photo?) {
+        if let photo = photo {
+            photoImageView.image = UIImage(blurHash: photo.blurHash, size: CGSize(width: 32, height: 32))
+            authorLabel.text = "Photo by author"
+        } else {
+            photoImageView.image = nil
+            authorLabel.text = "Photo by"
+        }
+    }
     
     private func configurePhotoImageView() {
         contentView.addSubview(photoImageView)

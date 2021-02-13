@@ -8,17 +8,18 @@
 import SnapKit
 
 class MainViewController: UIViewController {
-    
     private let viewModel: MainViewModel
-    
+
+    private let spinnerView = UIActivityIndicatorView(style: .large)
     private let stretchyHeaderHeight: CGFloat = 350
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
         return tableView
     }()
 
-    private lazy var topicsSollectionView: UICollectionView = {
+    private lazy var topicsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 5
@@ -34,6 +35,7 @@ class MainViewController: UIViewController {
     }()
 
     private var topicsCollectionViewHeightConstraint: Constraint?
+    private var photosContentOffsets = [Int: CGPoint]()
     
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -50,29 +52,12 @@ class MainViewController: UIViewController {
         loadData()
     }
 
-    private func loadData() {
-        bindViewModel()
-        viewModel.fetchPosts()
-        viewModel.fetchTopics()
-    }
-    
     private func configureUI() {
+        view.backgroundColor = .darkGray
         configureNavigationBar()
+        configureSpinnerView()
         configureTableView()
         configureTopicsView()
-    }
-
-    private func bindViewModel() {
-        viewModel.didEndRequest = {
-            self.tableView.reloadData()
-        }
-        viewModel.didGetError = { error in
-            print(error)
-        }
-        viewModel.didFetchTopics = {
-            self.topicsSollectionView.reloadData()
-            self.topicsSollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
-        }
     }
 
     private func configureNavigationBar() {
@@ -86,9 +71,18 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
     }
 
+    private func configureSpinnerView() {
+        spinnerView.hidesWhenStopped = true
+        view.addSubview(spinnerView)
+        spinnerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview()
+        }
+    }
+
     private func configureTopicsView() {
-        view.addSubview(topicsSollectionView)
-        topicsSollectionView.snp.makeConstraints {
+        view.addSubview(topicsCollectionView)
+        topicsCollectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
             $0.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
@@ -103,6 +97,10 @@ class MainViewController: UIViewController {
         tableView.tableHeaderView = header
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.prefetchDataSource = self
+        tableView.isHidden = true
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = UIColor.clear
         let identifier = String(describing: PhotoTableViewCell.self)
         tableView.register(PhotoTableViewCell.self, forCellReuseIdentifier: identifier)
         tableView.snp.makeConstraints {
@@ -112,17 +110,89 @@ class MainViewController: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
-    
+
+    private func loadData() {
+        bindViewModel()
+        viewModel.fetchTopics()
+    }
+
+    private func bindViewModel() {
+        viewModel.didEndRequest = {
+            self.tableView.reloadData()
+        }
+        viewModel.didGetError = { error in
+            print(error)
+        }
+        viewModel.didFetchTopics = { [unowned self] in
+            self.topicsCollectionView.reloadData()
+            self.topicsCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
+            self.switchTopic(to: 0)
+        }
+        viewModel.didFetchPhotos = { [unowned self] (topicIndex, indexPaths) in
+            guard topicIndex == self.topicsCollectionView.indexPathsForSelectedItems?[0].row else {
+                print(topicIndex)
+                return
+            }
+
+            guard let newIndexPathsToReload = indexPaths else {
+                // Photos for the topic at topicIndex is loading for the first time.
+                self.spinnerView.stopAnimating()
+                self.tableView.isHidden = false
+                self.tableView.reloadData()
+                return
+            }
+
+            let indexPathsToReload = self.visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+            self.tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+        }
+        viewModel.didSwitchTopicTo = { [unowned self] topicIndex in
+            if topicIndex == 0 {
+                let header = StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.stretchyHeaderHeight))
+                header.imageView.image = UIImage(named: "image")
+                self.tableView.tableHeaderView = header
+            } else {
+                self.tableView.tableHeaderView = nil
+            }
+            self.tableView.reloadData()
+
+            // TODO: - dispatchqueue main async?
+            if let previousContentOffset = self.photosContentOffsets[topicIndex] {
+    //            print("select indexPath: \(topicIndex), offset: \(previousContentOffset)")
+                self.tableView.setContentOffset(previousContentOffset, animated: false)
+            } else {
+    //            print("offset: zero")
+                self.tableView.setContentOffset(.zero, animated: false)
+            }
+        }
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let header = tableView.tableHeaderView as? StretchyHeaderView else {
             return
         }
         header.scrollViewDidScroll(scrollView: tableView)
     }
+
+    private func switchTopic(to topicIndex: Int) {
+        if viewModel.isTopicPageFirstFetch(for: topicIndex) {
+            tableView.isHidden = true
+            spinnerView.startAnimating()
+        }
+        viewModel.switchTopic(to: topicIndex)
+    }
 }
 
+// MARK: - UICollectionView Delegate and DataSource
 extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        photosContentOffsets[indexPath.row] = tableView.contentOffset
+//        print("deselect indexPath: \(indexPath.row), offset: \(photosContentOffsets[indexPath.row])")
+    }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.row != viewModel.currentTopicIndex else { return }
+        switchTopic(to: indexPath.row)
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -137,20 +207,38 @@ extension MainViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - tableView protocols
+// MARK: - UITableView Delegate and DataSource
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let post = viewModel.posts[indexPath.row]
+//        viewModel.updatePostLikeCount(id: post.id)
+    }
+}
+
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return calculateCellHeight(viewModel.posts[indexPath.row].height, viewModel.posts[indexPath.row].width)
+        if isLoadingCell(for: indexPath) {
+            return view.frame.width
+        } else {
+            return calculateCellHeight(viewModel.currentTopicPhoto(at: indexPath.row).height, viewModel.currentTopicPhoto(at: indexPath.row).width)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.posts.count
+        return viewModel.totalTopicPhotosCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = String(describing: PhotoTableViewCell.self)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? PhotoTableViewCell else { return UITableViewCell() }
-        cell.url = viewModel.posts[indexPath.row].urls["small"]
+
+        if isLoadingCell(for: indexPath) {
+            cell.configure(with: nil)
+        } else {
+            cell.configure(with: viewModel.currentTopicPhoto(at: indexPath.row))
+        }
+
+//        cell.url = viewModel.posts[indexPath.row].urls["small"]
         return cell
     }
     
@@ -159,9 +247,24 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-extension MainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = viewModel.posts[indexPath.row]
-        viewModel.updatePostLikeCount(id: post.id)
+// MARK: - UITableViewDataSourcePrefetching
+extension MainViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            viewModel.fetchPhotos()
+        }
     }
 }
+
+private extension MainViewController {
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= viewModel.currentTopicPhotosCount()
+    }
+
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
+    }
+}
+
