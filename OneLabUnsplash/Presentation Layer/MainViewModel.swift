@@ -117,7 +117,6 @@ final class MainViewModel {
             guard let self = self else { return }
 
             guard let totalPhotosString = response.allHeaderFields["x-total"] as? String, let totalPhotos = Int(totalPhotosString) else {
-                print(response.allHeaderFields)
                 self.didGetError(DataResponseError.decodeError.reason)
                 return
             }

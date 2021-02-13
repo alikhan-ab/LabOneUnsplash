@@ -41,7 +41,6 @@ extension NetworkRequest {
                 return
             }
             do {
-//                print(String(data: data, encoding: .utf8) ?? "Cant convert to string")
                 let decodedData = try self.decode(data)
                 completion(decodedData, response)
             } catch {

@@ -19,8 +19,6 @@ final class PhotoTableViewCell: UITableViewCell {
         label.textColor = .white
         return label
     }()
-    
-    var url: String?
 
     var photo: Photo? {
         didSet {
@@ -37,6 +35,25 @@ final class PhotoTableViewCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func configurePhotoImageView() {
+        contentView.addSubview(photoImageView)
+        photoImageView.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(0)
+            $0.top.equalToSuperview().offset(0)
+            $0.right.equalToSuperview().offset(0)
+            $0.bottom.equalToSuperview().offset(0)
+        }
+    }
+
+    private func configureAuthorLabel() {
+        contentView.addSubview(authorLabel)
+        authorLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(10)
+            $0.trailing.lessThanOrEqualToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-10)
+        }
     }
 
     func configure(with photo: Photo?) {
@@ -58,25 +75,6 @@ final class PhotoTableViewCell: UITableViewCell {
         } else {
             photoImageView.image = nil
             authorLabel.text = "Photo by"
-        }
-    }
-    
-    private func configurePhotoImageView() {
-        contentView.addSubview(photoImageView)
-        photoImageView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(0)
-            $0.top.equalToSuperview().offset(0)
-            $0.right.equalToSuperview().offset(0)
-            $0.bottom.equalToSuperview().offset(0)
-        }
-    }
-
-    private func configureAuthorLabel() {
-        contentView.addSubview(authorLabel)
-        authorLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(10)
-            $0.trailing.lessThanOrEqualToSuperview().offset(-10)
-            $0.bottom.equalToSuperview().offset(-10)
         }
     }
 }
