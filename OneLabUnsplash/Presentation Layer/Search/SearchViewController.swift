@@ -182,7 +182,7 @@ class SearchViewController: UIViewController {
     // MARK: User interactions
     
     @objc func segmentedControlDidChange(_ segmentedControl: UISegmentedControl) {
-        viewModel.setCurrentCell(selectedSegmentIndex: segmentedControl.selectedSegmentIndex)
+        setCurrentCell(selectedSegmentIndex: segmentedControl.selectedSegmentIndex)
         tableView.reloadData()
     }
     
@@ -210,21 +210,21 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.getNumberOfRowsInSection(section: section)
+        return getNumberOfRowsInSection(section: section)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.getNumberOfSections()
+        return getNumberOfSections()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if viewModel.isSearchMode {
             let cell: SearchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            let cellTitle = viewModel.getSearchCellTitle(indexPath: indexPath)
+            let cellTitle = getSearchCellTitle(indexPath: indexPath)
             cell.titleLabel.text = cellTitle
             return cell
         }
-        switch viewModel.currentCell {
+        switch viewModel.currentItem {
         case .photo:
             let cell: PhotoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             let image = UIImage(named: "image")
@@ -245,7 +245,7 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.getSectionTitle(section: section)
+        return getSectionTitle(section: section)
     }
 }
 
@@ -257,7 +257,7 @@ extension SearchViewController: UITableViewDelegate {
         if viewModel.isSearchMode {
             print(indexPath)
         } else {
-            switch viewModel.currentCell {
+            switch viewModel.currentItem {
             case .photo:
                 print("Появятся три точки (Закрузка, +, лайк)")
             case .collection:
@@ -274,11 +274,96 @@ extension SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(viewModel.getSectionHeight(section: section))
+        return CGFloat(getSectionHeight(section: section))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(viewModel.getCellHeight())
+        return CGFloat(getCellHeight())
+    }
+    
+    func getCellHeight() -> Int {
+        if viewModel.isSearchMode {
+            return 45
+        }
+        switch viewModel.currentItem {
+        case .photo:
+            return 350
+        case .collection:
+            return 230
+        default:
+            return 120
+        }
+    }
+    
+    func setCurrentCell(selectedSegmentIndex: Int) {
+        switch selectedSegmentIndex {
+        case 0:
+            viewModel.currentItem = .photo
+        case 1:
+            viewModel.currentItem = .collection
+        default:
+            viewModel.currentItem = .user
+        }
+    }
+    
+    func getSectionHeight(section: Int) -> Int {
+        if section == 0 && viewModel.recentItems.count == 0 || !viewModel.isSearchMode {
+            return 0
+        }
+        return 50
+    }
+    
+    func getSectionTitle(section: Int) -> String? {
+        if viewModel.isSearchMode {
+            switch section {
+            case 0:
+                guard !viewModel.recentItems.isEmpty else { return nil }
+                return "Recent"
+            case 1:
+                guard !viewModel.trendingItems.isEmpty else { return nil }
+                return "Trending"
+            default:
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    func getNumberOfRowsInSection(section: Int) -> Int {
+        if viewModel.isSearchMode {
+            switch section {
+            case 0:
+                return viewModel.recentItems.count
+            default:
+                return viewModel.trendingItems.count
+            }
+        }
+        switch viewModel.currentItem {
+        case .photo:
+            return 10
+        case .collection:
+            return 10
+        default:
+            return 10
+        }
+    }
+    
+    func getNumberOfSections() -> Int {
+        if viewModel.isSearchMode {
+            return 2
+        }
+        return 1
+    }
+    
+    func getSearchCellTitle(indexPath: IndexPath) -> String {
+        var item: String
+        switch indexPath.section {
+        case 0:
+            item = viewModel.recentItems[indexPath.row]
+        default:
+            item = viewModel.trendingItems[indexPath.row]
+        }
+        return item
     }
 }
 

@@ -13,6 +13,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         tabBar.barTintColor = .black
         tabBar.isTranslucent = false
+        tabBar.tintColor = .white
         
         let mainviewModel = MainViewModel()
         let mainViewController = MainViewController(viewModel: mainviewModel)
@@ -20,14 +21,14 @@ class TabBarController: UITabBarController {
         let searchViewController = SearchViewController(viewModel: searchviewModel)
         
         viewControllers = [
-            generateNavigationController(rootViewController: mainViewController, title: "random"), // Тут поменяем на иконки
-            generateNavigationController(rootViewController: searchViewController, title: "search")
+            generateNavigationController(rootViewController: mainViewController, imageName: "photo.fill"),
+            generateNavigationController(rootViewController: searchViewController, imageName: "magnifyingglass")
         ]
     }
     
-    private func generateNavigationController(rootViewController: UIViewController, title: String) -> UINavigationController {
+    private func generateNavigationController(rootViewController: UIViewController, imageName: String) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: rootViewController)
-        navigationController.tabBarItem.title = title
+        navigationController.tabBarItem.image = UIImage(systemName: imageName)
         return navigationController
     }
 }
