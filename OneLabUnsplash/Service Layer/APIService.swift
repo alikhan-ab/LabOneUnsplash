@@ -12,12 +12,15 @@ protocol APIService {
     func fetchPhotos(for topic: Topic, page: Int,
                      success: @escaping ([Photo], HTTPURLResponse) -> Void,
                      failure: @escaping (DataResponseError) -> Void)
-    func fetchImage(for photo: Photo)
+    func fetchPhotoOfTheDay(success: @escaping (Photo, HTTPURLResponse) -> Void,
+                            failure: @escaping (DataResponseError) -> Void)
 }
 
 final class APIServiceImpl {
     let topicRequest: ApiRequest = ApiRequest(resource: TopicsResource())
+    let photoOfTheDayRequest: ApiRequest = ApiRequest(resource: PhotoOfTheDayResource())
     var topicPhotosRequests: [String: ApiRequest<TopicPhotosResource>] = [:]
+
 }
 
 extension APIServiceImpl: APIService {
@@ -34,7 +37,13 @@ extension APIServiceImpl: APIService {
         request.fetch(successCompletion: success, errorCompletion: failure)
     }
 
-    func fetchImage(for photo: Photo) {
-        return
+    func fetchPhotoOfTheDay(success: @escaping (Photo, HTTPURLResponse) -> Void, failure: @escaping (DataResponseError) -> Void) {
+        photoOfTheDayRequest.fetch(successCompletion: { (photos, response) in
+            if let photo = photos.first {
+                success(photo, response)
+            } else {
+                failure(DataResponseError.decodeError)
+            }
+        }, errorCompletion: failure)
     }
 }

@@ -29,6 +29,8 @@ final class MainViewModel {
     var didFetchPhotos: (Int, [IndexPath]?) -> Void = { _,_  in }
     var didSwitchTopicTo: (Int) -> Void = { _ in }
     var didDownloadImage: (Int, Int, UIImage) -> Void = { _,_,_ in }
+    var didFetchPhotoOfTheDay: (Photo) -> Void = {_ in }
+    var didInitialFetch: () -> Void = {}
 
 
     // MARK: - Other properties
@@ -41,10 +43,14 @@ final class MainViewModel {
         return array
     }()
     var currentTopicIndex = 0
+    private(set) var photoOfTheDay: Photo?
     private var areTopicsFetched: Bool = false
+    private var isPhotoOfTheDayFetched: Bool = false
     private let postService: PostService = PostServiceImpl()
     private let topicsRequest: ApiRequest = ApiRequest(resource: TopicsResource())
     private let apiService: APIService = APIServiceImpl()
+    private let imageDownloadService: ImageDownloadService = ImageDownloadServiceImpl.shared
+    private let group = DispatchGroup()
 
     // MARK: -
     func topicPhotosCount(for topicIndex: Int) -> Int {
@@ -76,6 +82,11 @@ final class MainViewModel {
     }
 
     // MARK: - Fetch Methods
+    func initialFetch() {
+        fetchTopics()
+        fetchPhotoOfTheDay()
+    }
+
     func fetchPosts() {
         postService.fetchPosts { [weak self] posts in
             self?.posts = posts
@@ -86,7 +97,18 @@ final class MainViewModel {
         }
     }
 
-    func fetchTopics() {
+    private func fetchPhotoOfTheDay() {
+        guard !isPhotoOfTheDayFetched else { return }
+        let success: (Photo, HTTPURLResponse) -> Void = { [weak self] (photo, _) in
+            self?.didFetchPhotoOfTheDay(photo)
+        }
+        let failure: (DataResponseError) -> Void = { [weak self] error in
+            self?.didGetError(error.reason)
+        }
+        apiService.fetchPhotoOfTheDay(success: success, failure: failure)
+    }
+
+    private func fetchTopics() {
         guard !areTopicsFetched else { return }
         let successClosure: ([Topic], HTTPURLResponse) -> Void = { [weak self] (topics, response) in
             guard let self = self else { return }

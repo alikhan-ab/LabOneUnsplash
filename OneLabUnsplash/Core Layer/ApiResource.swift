@@ -89,3 +89,12 @@ extension TopicPhotosResource: PagedResource {
         return Int(queryItems!["page"]!)!
     }
 }
+
+// MARK: - RANDOM PHOTO OF THE DAY
+struct PhotoOfTheDayResource: ApiResource {
+    typealias ModelType = Photo
+    let methodPath: String = "/photos/random"
+    var queryItems: [String : String]? = ["collections":"1459961",
+                                          "orientation": "landscape",
+                                          "count": "1"]
+}

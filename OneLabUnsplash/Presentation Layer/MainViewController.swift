@@ -11,7 +11,14 @@ class MainViewController: UIViewController {
     private let viewModel: MainViewModel
 
     private let spinnerView = UIActivityIndicatorView(style: .large)
+    private let mainSpinnerView = UIActivityIndicatorView(style: .large)
     private let stretchyHeaderHeight: CGFloat = 350
+
+    private lazy var header: StretchyHeaderView = {
+        let header =  StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.stretchyHeaderHeight))
+        header.backgroundColor = .black
+        return header
+    }()
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -60,6 +67,7 @@ class MainViewController: UIViewController {
         configureSpinnerView()
         configureTableView()
         configureTopicsView()
+        configureMainSpinner()
     }
 
     private func configureNavigationBar() {
@@ -94,8 +102,9 @@ class MainViewController: UIViewController {
 
     private func configureTableView() {
         view.addSubview(tableView)
-        let header = StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: stretchyHeaderHeight))
-        header.imageView.image = UIImage(named: "image")
+//        let header = StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: stretchyHeaderHeight))
+        let header = self.header
+        header.configure(with: nil)
         tableView.tableHeaderView = header
         tableView.dataSource = self
         tableView.delegate = self
@@ -113,9 +122,18 @@ class MainViewController: UIViewController {
         }
     }
 
+    private func configureMainSpinner() {
+        view.addSubview(spinnerView)
+        spinnerView.isHidden = false
+        spinnerView.startAnimating()
+        spinnerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
     private func loadData() {
         bindViewModel()
-        viewModel.fetchTopics()
+        viewModel.initialFetch()
     }
 
     // MARK: - View Model Binding
@@ -127,9 +145,11 @@ class MainViewController: UIViewController {
             print(error)
         }
         viewModel.didFetchTopics = { [unowned self] in
+            self.mainSpinnerView.stopAnimating()
             self.topicsCollectionView.reloadData()
             self.topicsCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
             self.switchTopic(to: 0)
+
         }
         viewModel.didFetchPhotos = { [unowned self] (topicIndex, indexPaths) in
             guard topicIndex == self.topicsCollectionView.indexPathsForSelectedItems?[0].row else {
@@ -147,10 +167,15 @@ class MainViewController: UIViewController {
             let indexPathsToReload = self.visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
             self.tableView.reloadRows(at: indexPathsToReload, with: .automatic)
         }
+        viewModel.didFetchPhotoOfTheDay = { [unowned self] photo in
+            self.header.configure(with: photo)
+        }
         viewModel.didSwitchTopicTo = { [unowned self] topicIndex in
             if topicIndex == 0 {
-                let header = StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.stretchyHeaderHeight))
-                header.imageView.image = UIImage(named: "image")
+//                let header = StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.stretchyHeaderHeight))
+//                header.imageView.image = UIImage(named: "image")
+//                self.tableView.tableHeaderView = header
+//                self.tableView.tableHeaderView?.isHidden = false
                 self.tableView.tableHeaderView = header
             } else {
                 self.tableView.tableHeaderView = nil
@@ -161,15 +186,6 @@ class MainViewController: UIViewController {
                 self.spinnerView.stopAnimating()
             }
             self.tableView.reloadData()
-
-            // TODO: - dispatchqueue main async?
-//            if let previousContentOffset = self.photosContentOffsets[topicIndex] {
-//    //            print("select indexPath: \(topicIndex), offset: \(previousContentOffset)")
-//                self.tableView.setContentOffset(previousContentOffset, animated: false)
-//            } else {
-//    //            print("offset: zero")
-//                self.tableView.setContentOffset(.zero, animated: false)
-//            }
         }
     }
 
