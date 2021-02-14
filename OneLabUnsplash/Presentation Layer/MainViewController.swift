@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
 
     private lazy var header: StretchyHeaderView = {
         let header =  StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.stretchyHeaderHeight))
-        header.backgroundColor = .black
+        header.backgroundColor = UIColor.darkGray3
         return header
     }()
 
@@ -62,7 +62,7 @@ class MainViewController: UIViewController {
 
     // MARK: - Configure Methods
     private func configureUI() {
-        view.backgroundColor = .darkGray
+        view.backgroundColor = UIColor.darkGray3
         configureNavigationBar()
         configureSpinnerView()
         configureTableView()

@@ -35,9 +35,9 @@ final class MainViewModel {
 
     // MARK: - Other properties
     private(set) var posts: [Photo] = []
-    private(set) var topics: [Topic] = []
+    private(set) var topics: [Topic] = [Topic.editorialTopic]
     fileprivate var topicPages: [TopicPage] = {
-        let editorialTopic = Topic(slug: "fashion", title: "Editorial", photosURL: URL(string: "https://api.unsplash.com/collections/317099/photos")!)
+        let editorialTopic = Topic.editorialTopic
         var topicPage = TopicPage(topic: editorialTopic)
         let array = [topicPage]
         return array
