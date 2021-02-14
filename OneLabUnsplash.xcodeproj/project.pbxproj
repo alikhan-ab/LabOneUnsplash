@@ -26,6 +26,10 @@
 		FD485A2C25D5FD9A00519DE2 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD485A2B25D5FD9A00519DE2 /* CollectionTableViewCell.swift */; };
 		FD485A2F25D5FDA600519DE2 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD485A2E25D5FDA600519DE2 /* UserTableViewCell.swift */; };
 		FD733DD125D17F6B001B2CE4 /* FiltersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD733DD025D17F6B001B2CE4 /* FiltersTableViewCell.swift */; };
+		FD7C4AFF25D9C73600E148CA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C4AFE25D9C73600E148CA /* NetworkService.swift */; };
+		FD7C4B0225D9C75200E148CA /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C4B0125D9C75200E148CA /* NetworkDataFetcher.swift */; };
+		FD7C4B0525D9C76600E148CA /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C4B0425D9C76600E148CA /* SearchResults.swift */; };
+		FD7C4B0825D9C7B200E148CA /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C4B0725D9C7B200E148CA /* PhotoCell.swift */; };
 		FD80C37925C6875A0092F525 /* UnsplashKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD80C37825C6875A0092F525 /* UnsplashKeys.plist */; };
 		FD80C38A25C68B440092F525 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C38925C68B440092F525 /* PostService.swift */; };
 		FD80C38D25C68B630092F525 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80C38C25C68B630092F525 /* Photo.swift */; };
@@ -63,6 +67,10 @@
 		FD485A2B25D5FD9A00519DE2 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		FD485A2E25D5FDA600519DE2 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		FD733DD025D17F6B001B2CE4 /* FiltersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewCell.swift; sourceTree = "<group>"; };
+		FD7C4AFE25D9C73600E148CA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		FD7C4B0125D9C75200E148CA /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
+		FD7C4B0425D9C76600E148CA /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		FD7C4B0725D9C7B200E148CA /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FD80C37825C6875A0092F525 /* UnsplashKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnsplashKeys.plist; sourceTree = "<group>"; };
 		FD80C38925C68B440092F525 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		FD80C38C25C68B630092F525 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -153,6 +161,8 @@
 				BE9D2C5325C683940089BFA0 /* ApiResource.swift */,
 				FD80C38925C68B440092F525 /* PostService.swift */,
 				FD80C39325C6939B0092F525 /* PostDataProvider.swift */,
+				FD7C4AFE25D9C73600E148CA /* NetworkService.swift */,
+				FD7C4B0125D9C75200E148CA /* NetworkDataFetcher.swift */,
 			);
 			path = "Service Layer";
 			sourceTree = "<group>";
@@ -196,6 +206,8 @@
 				FDDA961825D75B8C0086C850 /* PhotosFromCollectionViewController.swift */,
 				FDCEB0E225D9026600B200F4 /* UserProfileViewController.swift */,
 				FDCEB0E525D90F5800B200F4 /* PhotoViewController.swift */,
+				FD7C4B0425D9C76600E148CA /* SearchResults.swift */,
+				FD7C4B0725D9C7B200E148CA /* PhotoCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -329,8 +341,10 @@
 				FD80C38A25C68B440092F525 /* PostService.swift in Sources */,
 				FD485A2C25D5FD9A00519DE2 /* CollectionTableViewCell.swift in Sources */,
 				BE2B8B5925C6AF9B00E0D1D5 /* MainViewModel.swift in Sources */,
+				FD7C4B0225D9C75200E148CA /* NetworkDataFetcher.swift in Sources */,
 				FD047A6225CB6FFC0072064C /* SearchViewController.swift in Sources */,
 				FD80C39425C6939B0092F525 /* PostDataProvider.swift in Sources */,
+				FD7C4B0525D9C76600E148CA /* SearchResults.swift in Sources */,
 				BE1A880F25B0075B0033B322 /* OneLabUnsplash.xcdatamodeld in Sources */,
 				FD80C38D25C68B630092F525 /* Photo.swift in Sources */,
 				BE9D2C5125C590040089BFA0 /* NetworkRequest.swift in Sources */,
@@ -338,6 +352,8 @@
 				FD19A27125CF513300CCA8E3 /* FiltersViewController.swift in Sources */,
 				FD80C39825C6943F0092F525 /* StretchyHeaderView.swift in Sources */,
 				FD733DD125D17F6B001B2CE4 /* FiltersTableViewCell.swift in Sources */,
+				FD7C4AFF25D9C73600E148CA /* NetworkService.swift in Sources */,
+				FD7C4B0825D9C7B200E148CA /* PhotoCell.swift in Sources */,
 				FDCEB0E625D90F5800B200F4 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

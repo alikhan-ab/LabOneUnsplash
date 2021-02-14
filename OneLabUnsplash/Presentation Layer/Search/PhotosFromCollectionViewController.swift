@@ -93,7 +93,9 @@ class PhotosFromCollectionViewController: UIViewController {
 
 extension PhotosFromCollectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = PhotoViewController(usernameTitle: "Aidana", imageName: "image")
+        let viewController = PhotoViewController()
+        viewController.imageName = "image"
+        viewController.usernameTitle = "Aidana"
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true, completion: nil)
     }

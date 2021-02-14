@@ -7,5 +7,6 @@ target 'OneLabUnsplash' do
 
   # Pods for OneLabUnsplash
   pod 'SnapKit', '~> 5.0.0'
+pod 'SDWebImage', '~> 5.0'
 
 end

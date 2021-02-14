@@ -9,8 +9,8 @@ import SnapKit
 
 class PhotoViewController: UIViewController {
     
-    var usernameTitle: String
-    var imageName: String
+    var usernameTitle: String = ""
+    var imageName: String = ""
     
     private let navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar()
@@ -27,6 +27,14 @@ class PhotoViewController: UIViewController {
         return imageView
     }()
     
+    var unsplashPhoto: UnsplashPhoto! {
+        didSet {
+            let photoUrl = unsplashPhoto.urls["regular"]
+            guard let imageURL = photoUrl, let url = URL(string: imageURL) else { return }
+            imageView.sd_setImage(with: url, completed: nil)
+        }
+    }
+    
     private let infoButton: UIButton = {
         let button = UIButton(frame: CGRect(x:0, y:0, width: 100, height:100))
         button.setImage(UIImage(named: "info"), for: .normal)
@@ -34,9 +42,7 @@ class PhotoViewController: UIViewController {
         return button
     }()
     
-    init(usernameTitle: String, imageName: String) {
-        self.usernameTitle = usernameTitle
-        self.imageName = imageName
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -81,7 +87,9 @@ class PhotoViewController: UIViewController {
     
     private func configureImageView() {
         view.addSubview(imageView)
-        imageView.image = UIImage(named: imageName)
+        if !imageName.isEmpty {
+            imageView.image = UIImage(named: imageName)
+        }
         imageView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }

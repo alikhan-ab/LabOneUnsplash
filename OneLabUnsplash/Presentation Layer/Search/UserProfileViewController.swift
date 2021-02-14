@@ -93,7 +93,9 @@ class UserProfileViewController: UIViewController {
 
 extension UserProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = PhotoViewController(usernameTitle: "username", imageName: "image")
+        let viewController = PhotoViewController()
+        viewController.imageName = "image"
+        viewController.usernameTitle = "username"
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true, completion: nil)
     }

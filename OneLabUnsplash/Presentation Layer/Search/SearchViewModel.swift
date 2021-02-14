@@ -16,7 +16,6 @@ final class SearchViewModel {
     
     let segmentItems = ["Photos", "Collections", "Users"]
     var trendingItems = ["crepes", "lunar new year", "carnival", "valentine", "wall street"]
-//    var recentItems = ["abc", "def", "red", "new year"]
     var isSearchMode = true
     let userDefaults = UserDefaults.standard
     

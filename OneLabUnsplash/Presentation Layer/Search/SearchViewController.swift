@@ -9,6 +9,8 @@ import SnapKit
 
 class SearchViewController: UIViewController {
     
+    var networkDataFetcher = NetworkDataFetcher()
+    private var photos = [UnsplashPhoto]()
     private let viewModel: SearchViewModel
     
     private var searchBar: UISearchBar = {
@@ -94,6 +96,9 @@ class SearchViewController: UIViewController {
         configureStackView()
         configureSegmentedControl()
         hideKeyboardWhenTappedAround()
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellId")
+        tableView.register(PhotoCell.self, forCellReuseIdentifier: PhotoCell.reuseId)
     }
     
     private func configureTitleView() {
@@ -226,9 +231,9 @@ extension SearchViewController: UITableViewDataSource {
         }
         switch viewModel.currentItem {
         case .photo:
-            let cell: PhotoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            let image = UIImage(named: "image")
-            cell.photoImageView.image = image
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.reuseId, for: indexPath) as! PhotoCell
+            let unsplashPhoto = photos[indexPath.row]
+            cell.unsplashPhoto = unsplashPhoto
             return cell
         case .collection:
             let cell: CollectionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -255,11 +260,28 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if viewModel.isSearchMode {
-            print(indexPath)
+            let item: String
+            switch indexPath.section {
+            case 0:
+                item = viewModel.getRecentItems()[indexPath.row]
+            default:
+                item = viewModel.trendingItems[indexPath.row]
+            }
+            searchBar.text = item
+            viewModel.isSearchMode.toggle()
+            self.networkDataFetcher.fetchImages(searchTerm: item) { [weak self] (searchResults) in
+                guard let fetchedPosts = searchResults else { return }
+                self?.photos = fetchedPosts.results
+                self?.tableView.reloadData()
+            }
+            tableView.reloadData()
         } else {
             switch viewModel.currentItem {
             case .photo:
-                let viewController = PhotoViewController(usernameTitle: "Aidana", imageName: "image")
+                let unsplashPhoto = photos[indexPath.row]
+                let viewController = PhotoViewController()
+                viewController.usernameTitle = "username"
+                viewController.unsplashPhoto = unsplashPhoto
                 viewController.modalPresentationStyle = .fullScreen
                 self.present(viewController, animated: true, completion: nil)
             case .collection:
@@ -343,7 +365,7 @@ extension SearchViewController: UITableViewDelegate {
         }
         switch viewModel.currentItem {
         case .photo:
-            return 10
+            return photos.count
         case .collection:
             return 10
         default:
@@ -385,6 +407,12 @@ extension SearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         viewModel.isSearchMode = false
         viewModel.addRecentItem(item: searchBar.text!)
+        self.networkDataFetcher.fetchImages(searchTerm: searchBar.text!) { [weak self] (searchResults) in
+            guard let fetchedPosts = searchResults else { return }
+            self?.photos = fetchedPosts.results
+            self?.tableView.reloadData()
+    
+        }
         tableView.reloadData()
     }
     
