@@ -60,7 +60,10 @@ final class PhotoTableViewCell: UITableViewCell {
         self.photo = photo
         if let photo = photo {
             authorLabel.text = "\(photo.user.firstName) \(photo.user.lastName ?? "")"
-            photoImageView.image = UIImage(blurHash: photo.blurHash, size: CGSize(width: 32, height: 32))
+            if let hash = photo.blurHash {
+                photoImageView.image = UIImage(blurHash: hash, size: CGSize(width: 32, height: 32))
+            }
+
             guard let imageUrl = photo.urls["small"] else {
                 return
             }

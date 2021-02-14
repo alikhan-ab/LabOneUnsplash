@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
 
     private lazy var header: StretchyHeaderView = {
         let header =  StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.stretchyHeaderHeight))
-        header.backgroundColor = .black
+        header.backgroundColor = UIColor.darkGray3
         return header
     }()
 
@@ -62,7 +62,7 @@ class MainViewController: UIViewController {
 
     // MARK: - Configure Methods
     private func configureUI() {
-        view.backgroundColor = .darkGray
+        view.backgroundColor = UIColor.darkGray3
         configureNavigationBar()
         configureSpinnerView()
         configureTableView()
@@ -172,13 +172,11 @@ class MainViewController: UIViewController {
         }
         viewModel.didSwitchTopicTo = { [unowned self] topicIndex in
             if topicIndex == 0 {
-//                let header = StretchyHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.stretchyHeaderHeight))
-//                header.imageView.image = UIImage(named: "image")
-//                self.tableView.tableHeaderView = header
-//                self.tableView.tableHeaderView?.isHidden = false
                 self.tableView.tableHeaderView = header
-            } else {
-                self.tableView.tableHeaderView = nil
+            } else if self.tableView.tableHeaderView == self.header {
+                var frame = CGRect.zero
+                frame.size.height = topicsCollectionView.frame.height
+                self.tableView.tableHeaderView = UIView(frame: frame)
             }
 
             if !viewModel.isTopicPageFirstFetch(for: topicIndex) {

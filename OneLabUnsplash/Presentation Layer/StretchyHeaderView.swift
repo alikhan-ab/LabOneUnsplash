@@ -82,7 +82,9 @@ final class StretchyHeaderView: UIView {
         self.photo = photo
         if let photo = photo {
 //            authorLabel.text = "\(photo.user.firstName) \(photo.user.lastName ?? "")"
-            imageView.image = UIImage(blurHash: photo.blurHash, size: CGSize(width: 32, height: 32))
+            if let hash = photo.blurHash {
+                imageView.image = UIImage(blurHash: hash, size: CGSize(width: 32, height: 32))
+            }
             guard let imageUrl = photo.urls["small"] else {
                 return
             }

@@ -10,6 +10,8 @@ struct Topic {
     let slug: String
     let title: String
     let photosURL: URL
+
+    static let editorialTopic = Topic(slug: "fashion", title: "Editorial", photosURL: URL(string: "https://api.unsplash.com/collections/317099/photos")!)
 }
 
 extension Topic: Decodable {
