@@ -70,6 +70,7 @@ class PhotosFromCollectionViewController: UIViewController {
     
     private func configureTableView() {
         view.addSubview(tableView)
+        tableView.backgroundColor = .black
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PhotoTableViewCell.self)
@@ -82,18 +83,19 @@ class PhotosFromCollectionViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.topItem?.title = ""
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(downloadButtonDidPress))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareButtonDidPress))
         navigationItem.rightBarButtonItem!.tintColor = UIColor.white
     }
     
-    @objc private func downloadButtonDidPress() {
-        
+    @objc private func shareButtonDidPress() {
     }
 }
 
 extension PhotosFromCollectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Появятся три точки (Закрузка, +, лайк)")
+        let viewController = PhotoViewController(usernameTitle: "Aidana", imageName: "image")
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -158,7 +158,7 @@ class SearchViewController: UIViewController {
             $0.bottom.equalToSuperview()
         }
         
-        if section == 0 && viewModel.recentItems.count != 0 {
+        if section == 0 && viewModel.getRecentItems().count != 0 {
             let clearButton = UIButton(type: .system)
             clearButton.setTitle("Clear", for: .normal)
             clearButton.setTitleColor(.white, for: .normal)
@@ -259,12 +259,15 @@ extension SearchViewController: UITableViewDelegate {
         } else {
             switch viewModel.currentItem {
             case .photo:
-                print("Появятся три точки (Закрузка, +, лайк)")
+                let viewController = PhotoViewController(usernameTitle: "Aidana", imageName: "image")
+                viewController.modalPresentationStyle = .fullScreen
+                self.present(viewController, animated: true, completion: nil)
             case .collection:
                 let newViewController = PhotosFromCollectionViewController(viewModel: MainViewModel(), collectionName: "lunar new year", username: "enovaid")
                 self.navigationController?.pushViewController(newViewController, animated: true)
             default:
-                print("Профайл юзера")
+                let newViewController = UserProfileViewController()
+                self.navigationController?.pushViewController(newViewController, animated: true)
             }
         }
     }
@@ -307,7 +310,7 @@ extension SearchViewController: UITableViewDelegate {
     }
     
     func getSectionHeight(section: Int) -> Int {
-        if section == 0 && viewModel.recentItems.count == 0 || !viewModel.isSearchMode {
+        if section == 0 && viewModel.getRecentItems().count == 0 || !viewModel.isSearchMode {
             return 0
         }
         return 50
@@ -317,7 +320,7 @@ extension SearchViewController: UITableViewDelegate {
         if viewModel.isSearchMode {
             switch section {
             case 0:
-                guard !viewModel.recentItems.isEmpty else { return nil }
+                guard !viewModel.getRecentItems().isEmpty else { return nil }
                 return "Recent"
             case 1:
                 guard !viewModel.trendingItems.isEmpty else { return nil }
@@ -333,7 +336,7 @@ extension SearchViewController: UITableViewDelegate {
         if viewModel.isSearchMode {
             switch section {
             case 0:
-                return viewModel.recentItems.count
+                return viewModel.getRecentItems().count
             default:
                 return viewModel.trendingItems.count
             }
@@ -359,7 +362,7 @@ extension SearchViewController: UITableViewDelegate {
         var item: String
         switch indexPath.section {
         case 0:
-            item = viewModel.recentItems[indexPath.row]
+            item = viewModel.getRecentItems()[indexPath.row]
         default:
             item = viewModel.trendingItems[indexPath.row]
         }
@@ -381,7 +384,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         viewModel.isSearchMode = false
-        viewModel.recentItems.insert(searchBar.text!, at: 0)
+        viewModel.addRecentItem(item: searchBar.text!)
         tableView.reloadData()
     }
     
