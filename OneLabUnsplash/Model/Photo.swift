@@ -46,7 +46,7 @@ struct Photo {
     let urls: [String: URL]
     let width: Int
     let height: Int
-    let blurHash: String
+    let blurHash: String?
     let user: User
 }
 
